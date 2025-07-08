@@ -1,0 +1,41 @@
+PS C:\MyRepos\IBTraderPython> py .\main.py
+C:\Users\AdoTopuz\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas_ta\__init__.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution, DistributionNotFound
+Enter stock symbol (e.g., TSLA): TSLA
+Connected to IB Gateway/TWS at 127.0.0.1:7496
+Fetching 1 D of 5 mins historical data for TSLA...
+Successfully fetched 78 bars for TSLA.
+Disconnected from IB.
+C:\MyRepos\IBTraderPython\main.py:74: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  df.ta.vwap(append=True)
+
+--- Evaluation Result ---
+Traceback (most recent call last):
+  File "C:\MyRepos\IBTraderPython\main.py", line 181, in <module>
+    asyncio.run(main())
+    ~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\AdoTopuz\AppData\Local\Programs\Python\Python313\Lib\site-packages\nest_asyncio.py", line 30, in run
+    return loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\AdoTopuz\AppData\Local\Programs\Python\Python313\Lib\site-packages\nest_asyncio.py", line 98, in run_until_complete
+    return f.result()
+           ~~~~~~~~^^
+  File "C:\Users\AdoTopuz\AppData\Local\Programs\Python\Python313\Lib\asyncio\futures.py", line 199, in result
+    raise self._exception.with_traceback(self._exception_tb)     
+  File "C:\Users\AdoTopuz\AppData\Local\Programs\Python\Python313\Lib\asyncio\tasks.py", line 304, in __step_run_and_handle_result
+    result = coro.send(None)
+  File "C:\MyRepos\IBTraderPython\main.py", line 178, in main    
+    print(json.dumps(result, indent=2))
+          ~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AdoTopuz\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\AdoTopuz\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\AdoTopuz\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\AdoTopuz\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '    
+                    f'is not JSON serializable')
+TypeError: Object of type bool is not JSON serializable
+PS C:\MyRepos\IBTraderPython> 

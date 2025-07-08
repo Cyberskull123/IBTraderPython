@@ -1,0 +1,97 @@
+# Project: Trade Entry Signal Evaluator using Interactive Brokers API
+
+## Goal
+
+Create a Python script that connects to the Interactive Brokers API (TWS or IB Gateway), accepts a stock symbol (e.g., TSLA), and returns a recommendation on whether to **enter a trade** based on multiple technical indicators. The result should include a **score or count** of how many indicators support the trade direction and a final **buy/sell/hold** suggestion.
+
+---
+
+## Features
+
+### ✅ Input
+- A single stock symbol (e.g., TSLA)
+- Optional: Timeframe selection (default to 5-minute candles)
+
+### 📊 Data Source
+- Real-time or recent historical data from Interactive Brokers using the IB API
+
+---
+
+## 📈 Indicators to Implement
+
+Evaluate the following indicators:
+
+1. **Break of Structure (BoS)**
+   - Detect higher high / lower low breakouts relative to recent structure
+
+2. **13 EMA**
+   - Determine if price is currently above (bullish) or below (bearish) the 13-period EMA
+
+3. **VWAP**
+   - Check whether current price is above or below VWAP
+
+4. **RSI (Relative Strength Index)**
+   - Identify bullish divergence or confirm strength (above 50 = bullish bias)
+   - Optional: Overbought/oversold filter (70/30)
+
+5. **MACD**
+   - Use MACD histogram or signal crossovers to assess trend direction
+   - Optional: Check for divergence
+
+6. **Volume**
+   - Compare current volume to average volume; use as confirmation (e.g., high volume breakout)
+
+---
+
+## 🧠 Decision Logic
+
+1. Evaluate each indicator and mark as **positive (1)** or **negative (0)** signal
+2. Total the number of positive signals (0 to 6)
+3. Apply logic:
+   - **5–6 positives**: Strong Buy
+   - **3–4 positives**: Cautious Buy
+   - **1–2 positives**: Hold / Wait
+   - **0 positives**: Do Not Enter
+
+Output a summary like:
+```json
+{
+  "symbol": "TSLA",
+  "positive_signals": 5,
+  "total_indicators": 6,
+  "indicators": {
+    "break_of_structure": true,
+    "ema_13": true,
+    "vwap": true,
+    "rsi": true,
+    "macd": false,
+    "volume": true
+  },
+  "recommendation": "Strong Buy"
+}
+
+
+🧱 Technical Stack
+Language: Python 3.x
+
+Broker API: Interactive Brokers Python API (ib_insync)
+
+Indicators: TA-Lib, pandas_ta, or custom implementations
+
+Data: Real-time or 1-day historical bars from IB
+
+📦 Optional Enhancements (Future Scope)
+Add support for multi-timeframe analysis (e.g., 5-min + 1-hr)
+
+Plot charts with indicators using matplotlib or plotly
+
+Auto-trade entry if criteria met
+
+Send signal to a dashboard or notification (e.g., email, webhook)
+
+📌 Notes
+The script will be run manually (or scheduled), not as a daemon
+
+You must have TWS or IB Gateway running and logged in
+
+Ensure proper error handling for API calls and data retrieval
